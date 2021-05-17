@@ -153,8 +153,8 @@ export class GPSInformationTable extends React.Component {
         title: "आरोपीचे नाव",
         key: "name",
         sorter: (a, b) =>  {
-          if(a.name.length){
-            return a.name.localeCompare(b.name)
+          if(a.name && a.name.length && b.name && b.name.length){
+            return a.name && a.name.localeCompare(b.name)
           }
        },
         render: (text, record) => (
@@ -168,7 +168,7 @@ export class GPSInformationTable extends React.Component {
         title: "पोलीस स्टेशन",
         key: "districtName",
         sorter: (a, b) =>  {
-          if(a.districtName.length && b.districtName.length){
+          if(a.districtName && a.districtName.length && b.districtName && b.districtName.length){
             return a.districtName.localeCompare(b.districtName)
           }
         },
