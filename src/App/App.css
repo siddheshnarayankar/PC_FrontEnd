@@ -1,0 +1,61 @@
+ 
+.logo {
+    height: 50px;
+    line-height: 25px;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5em;
+    color: #757272;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 1px dotted #4c4848;
+    margin: 5px;
+}
+
+.ant-layout-content{
+    margin-left: 215px!important;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.ant-layout-content.collapsed{
+    margin-left: 95px!important;
+}
+.ant-layout-sider-has-trigger{
+    position:fixed;
+    height: 100%;
+    z-index: 9;
+}
+.ant-layout-header{
+    width: 100%;
+    right: 0px;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    z-index: 8;
+}
+.ant-layout-header.collapsed{
+    width: 100%;
+}
+ul.ant-menu.ant-menu-horizontal {
+    text-align: right;
+}
+
+.ant-table-thead {
+    text-transform: uppercase;
+}
+
+.ant-modal {
+   
+    line-height: 100%;
+    list-style: none;
+    top: 15px;
+ 
+}
+.ant-modal-body{
+    max-height: 80vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+ 
+
+ 
