@@ -31,7 +31,9 @@ export const professionalAction = {
     getNews,
     updateNews,
     getGPSInformation,
-    getGPSInformationSuccess
+    getGPSInformationSuccess,
+    getReport3,
+    getReport1
 }
 
 
@@ -412,10 +414,10 @@ function createNews(data) {
 }
 
 
-function getGPSInformation() {
+function getGPSInformation(cityId) {
   
         // dispatch(request());
-        return  professionalService.getGPSInformation()     
+        return  professionalService.getGPSInformation(cityId)     
      
 
     // function request(gpsInformation) {
@@ -694,4 +696,12 @@ function uploadImage(data) {
     //         error
     //     }
     // }
+}
+
+
+function getReport3(data) {
+    return  professionalService.getReport3(data)     
+}
+function getReport1(data) {
+    return  professionalService.getReport1(data)     
 }

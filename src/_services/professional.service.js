@@ -21,10 +21,12 @@ export const professionalService = {
     createNews,
     getNews,
     updateNews,
-    getGPSInformation
+    getGPSInformation,
+    getReport3,
+    getReport1
 }
- // const baseUrl = 'http://localhost:8080/api';
- const baseUrl = 'https://www.criminalmis.in/api';
+  // const baseUrl = 'http://localhost:8080/api';
+  const baseUrl = 'https://www.criminalmis.in/api';
 
 function getAllMaster() {
     const requestOptions = {
@@ -137,13 +139,12 @@ function getNews(itemType) {
     }
     return fetch(`${baseUrl}/criminal/getNews/${itemType}`, requestOptions).then(handleResponse);
 }
-function getGPSInformation() {
+function getGPSInformation(cityId) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader(),
-        data:JSON.stringify({name:'test'})
     }
-    return fetch(`${baseUrl}/criminal/getGPSInformation`, requestOptions);
+    return fetch(`${baseUrl}/criminal/getGPSInformation/${cityId}`, requestOptions);
 }
 
 
@@ -194,6 +195,30 @@ function updateCriminals(id, data) {
     return fetch(`${baseUrl}/criminal/update/${id}`, requestOptions).then(handleResponse);
 }
 
+function getReport3(data) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            ...authHeader()
+        } ,
+        body: JSON.stringify(data)
+    }
+    return fetch(`${baseUrl}/criminal/getReports3`, requestOptions);
+}
+function getReport1(data) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            ...authHeader()
+        } ,
+        body: JSON.stringify(data)
+    }
+    return fetch(`${baseUrl}/criminal/getReports1`, requestOptions);
+}
+
+
 function uploadImage(data) {
     const formData = new FormData();
     data && data.map((res) =>{
@@ -240,3 +265,5 @@ function handleResponse(response) {
     });
 
 }
+
+

@@ -124,7 +124,6 @@ export const OtherInformation = forwardRef((props, ref) => {
   
     const { onSuccess, onError, file, onProgress } = options;
 
-    console.log(file)
 
     new Compressor (file,  {
       quality: 0.2,

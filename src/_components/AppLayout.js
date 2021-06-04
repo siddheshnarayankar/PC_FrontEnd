@@ -70,6 +70,11 @@ export const AppLayout = (props) => {
     setTimeout(() => {
       setActiveMenu('8')
     }, 100);
+  }else if(location.pathname==='/reports'){
+    setTimeout(() => {
+      setActiveMenu('11');
+      setActiveMenu('111');
+    }, 100);
   }
   },[location.pathname])
   
@@ -100,9 +105,12 @@ export const AppLayout = (props) => {
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div className="logo">
           {collapsed ? (
-            <span style={{ whiteSpace: "nowrap" }}>PC</span>
+            <span style={{ whiteSpace: "nowrap" }}>CMIS</span>
           ) : (
-            <span style={{ whiteSpace: "nowrap" }}>P Criminal</span>
+            <span style={{ whiteSpace: "nowrap" ,display:'flex',justifyContent:'center',flexDirection:'column',color: '#c5c2c2'}}>
+              <span >CMIS</span>
+              <small style={{fontSize:'8px'}}>Criminal Monitoring Intelligent System</small>
+            </span>
           )}
         </div>
         <Menu theme="dark"  mode="inline" selectedKeys={[activeMenu]}    defaultSelectedKeys={['1']}   >
@@ -133,7 +141,19 @@ export const AppLayout = (props) => {
             <Menu.Item key="4"  icon={<FileSearchOutlined />}  > 
                    <Link to="/news">News</Link>
              </Menu.Item>
-            
+             {/* <Menu.Item key="10"  icon={<FileSearchOutlined />}  > 
+                   <Link to="/reports">Reports</Link>
+             </Menu.Item> */}
+             <SubMenu
+                  key="11"
+                  icon={<UserOutlined />}
+                  title="Reports"
+              >
+            {/* <Menu.Item key="3">आरोपी शोधा</Menu.Item> */}
+              <Menu.Item key="111">
+                <Link to="/reports">आरोपी सांख्यकी अहवाल</Link>
+              </Menu.Item>
+            </SubMenu>
             </>
             ):user && user.role && user.role==='8'?((
                 <>
@@ -206,7 +226,7 @@ export const AppLayout = (props) => {
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          ©2021 Created by Imark Technology
+          ©2021 Developed By I MARK TECHNOLOGY
         </Footer>
       </Layout>
     </Layout>

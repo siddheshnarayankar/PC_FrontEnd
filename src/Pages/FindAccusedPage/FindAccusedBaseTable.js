@@ -108,10 +108,10 @@ export class FindAccusedBaseTable extends React.Component {
   }
 
   onChangeTable = (pagination, filters, sorter, extra) =>{
-    console.log(pagination);
-    console.log(filters);
-    console.log(sorter);
-    console.log(extra);   
+    // console.log(pagination);
+    // console.log(filters);
+    // console.log(sorter);
+    // console.log(extra);   
   }
 
 
@@ -230,12 +230,6 @@ export class FindAccusedBaseTable extends React.Component {
         ),
       },
     });
-
-
- 
-
-
-
-    return <Table columns={columns} dataSource={this.props.data}  onChange={this.onChangeTable}/>;
+    return <Table columns={columns} dataSource={this.props.data}  />;
   }
 }

@@ -17,6 +17,7 @@ import { GPSInformation } from "../Pages/GPSInformation";
 import { Wanted } from "../Pages/Wanted/Wanted";
 import { Help } from "../Pages/Help/Help";
 import { AboutUs } from "../Pages/AboutUs/AboutUs";
+import { Reports } from "../Pages/Reports";
 
  
  
@@ -57,6 +58,7 @@ class App extends React.Component {
           <PrivateRoute exact path="/help" component={Help} />
           <PrivateRoute exact path="/aboutus" component={AboutUs} />
           <PrivateRoute exact path="/gps" component={GPSInformation} />
+          <PrivateRoute exact path="/reports" component={Reports} />
           <PrivateRoute exact path="/ProfessionalForm" component={ProfessionalForm} />
           <Route path="/login" component={LoginPage} />
         </div>

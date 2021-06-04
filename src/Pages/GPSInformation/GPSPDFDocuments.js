@@ -108,7 +108,7 @@ export  const MyDocument = (props) => (
        <View style={styles.header} >
         <Text style={{fontSize:'14px',fontWeight:600,marginBottom:8}}>(CMIS)-GPS APP Users Report</Text>
          <Text style={{fontSize:'14px',marginBottom:8}}>{
-           props.filterDate && props.filterDate.length?'From:'+ moment(props.filterDate[0]).format('YYYY/MM/DD') + ', To' + moment(props.filterDate[1]).format('YYYY/MM/DD'):null
+           props.filterDate && props.filterDate.length?'From: '+ moment(props.filterDate[0]).format('YYYY/MM/DD') + ', To: ' + moment(props.filterDate[1]).format('YYYY/MM/DD'):null
          }</Text>
            <Text style={{fontSize:'14px'}}>Total Records:{props.rows && props.rows.length}</Text>
        </View>
@@ -122,6 +122,7 @@ export  const MyDocument = (props) => (
             <Text  style={styles.imageCell}>फोटो</Text>
             {/* <Text  style={styles.cell}>GPS LOCATION</Text> */}
             <Text  style={styles.cell}>गस्त वेळ</Text>
+            <Text  style={styles.cell}>Counts</Text>
             <Text  style={styles.cell}>मिळून आला / नाही</Text>
         </View>
     {
@@ -141,7 +142,8 @@ export  const MyDocument = (props) => (
              
             {/* <Text  style={styles.cell} >{item.latitude} {item.longitude}</Text> */}
             <Text  style={styles.cell}>{moment(item.gpstimedate).format('YYYY/MM/DD')}</Text>
-            <Text  style={styles.cell}>{item.status}   {item.statusDetails}</Text>
+            <Text  style={styles.cell}>{item.counts}</Text>
+            <Text  style={styles.cell}>{item.status === 1?'होय':'नाही'}   {item.statusDetails}</Text>
     </View>
     ))
     }

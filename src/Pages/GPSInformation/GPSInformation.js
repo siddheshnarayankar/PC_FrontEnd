@@ -29,8 +29,8 @@ let columns = [];
 let data = [];
 
  
-  //const baseUrl = 'https://www.criminalmis.in/api';
- const baseUrl = 'http://localhost:8080/api';
+const baseUrl = 'https://www.criminalmis.in/api';
+ // const baseUrl = 'http://localhost:8080/api';
 class GPSInformation extends React.Component {
   constructor(props) {
     super(props);
@@ -51,10 +51,8 @@ class GPSInformation extends React.Component {
     this.setState({
       loading:true
     })
-    const { newsList ,gpsInformationList} = this.props;
-    console.log(gpsInformationList)
-    if(!gpsInformationList || !gpsInformationList.length){
-            professionalAction.getGPSInformation().then((res)=>{
+    const { newsList ,gpsInformationList,user} = this.props;
+            professionalAction.getGPSInformation(user && user.cityId).then((res)=>{
                   res && res.text().then(text => {
                     this.setState({
                       gpsInformationList: text && JSON.parse(text),
@@ -63,13 +61,6 @@ class GPSInformation extends React.Component {
                     this.props.dispatch(professionalAction.getGPSInformationSuccess(text && JSON.parse(text)));
             })
         })
-      }{
-        this.setState({
-          gpsInformationList: gpsInformationList,
-          loading:false
-        })
-      }
-
     } 
   }
  
@@ -92,15 +83,47 @@ class GPSInformation extends React.Component {
   onUserFormUpdate = () =>{
     this.userForm.current.onFinish(false);
   }
-  changePagination = (value) => {
-    if(value.currentDataSource){
+  changePagination = (sorter,filter,value) => {
+      
+    if(filter && filter.photo && filter && filter.status && filter && filter.userName){
+      if(value.currentDataSource){
+        this.setState({
+          gpsInformationList:value.currentDataSource
+        })
+      }
+    }
+    else if(sorter && sorter && sorter.column){
+      if(value.currentDataSource){
+        this.setState({
+          gpsInformationList:value.currentDataSource
+        })
+      }
+    }
+    else{
+      const { newsList ,gpsInformationList,user} = this.props;
       this.setState({
-        gpsInformationList:value.currentDataSource
+        gpsInformationList:gpsInformationList
       })
     }
+   
   }
    
- 
+  isSameDate(dates){
+    if(moment(dates[0]).isSame(dates[1], 'day') && moment(dates[0]).isSame(dates[1], 'month') && moment(dates[0]).isSame(dates[1], 'year')){
+        return true;
+    }else{
+      return false;
+    }
+  }
+  getFormat(date){
+     return moment(date).format('YYYY-MM-DD');
+  }
+  isSameDateCompareWithData(compareDate,filterDate){
+    if(moment(this.getFormat(compareDate)).isSame(this.getFormat(filterDate))){
+      return true
+    }
+    return false
+  }
 
   onFinishDateRangeGPSTable = (values) => {
    
@@ -108,7 +131,20 @@ class GPSInformation extends React.Component {
       let dates =  values && values.map((item)=>{
         return item.toISOString() 
      })
-      let temp =  _.filter(JSON.parse(JSON.stringify(this.state.gpsInformationList)), (o) => {
+
+     if(this.isSameDate(dates)){
+          let temp =  _.filter(this.state.gpsInformationList, (o) => {
+            if (this.isSameDateCompareWithData(o.gpstimedate,dates[1])) {
+                return o
+            }
+        });
+        this.setState({
+          gpsInformationList:temp,
+          filterDate:[dates[0]]
+        })
+     }else{
+          let temp =  _.filter(JSON.parse(JSON.stringify(this.state.gpsInformationList)), (o) => {
+            // console.log(moment(o.gpstimedate).format('YY-MM-DD'))
             if (moment(o.gpstimedate).isBetween(dates[0], dates[1])) {
                 return o
             }
@@ -117,6 +153,9 @@ class GPSInformation extends React.Component {
           gpsInformationList:temp,
           filterDate:[dates[0],dates[1]]
         })
+     }
+
+    
     }else{
       setTimeout(() => {
         const { newsList ,gpsInformationList} = this.props;
@@ -293,7 +332,7 @@ class GPSInformation extends React.Component {
   </div>
        
         <Divider />
-        <Spin spinning={loading} delay={500}>
+        <Spin spinning={loading} >
           <div>
         <GPSInformationTable
           onNewsStatusChange = {this.onNewsStatusChange}

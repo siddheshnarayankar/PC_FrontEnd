@@ -58,9 +58,7 @@ class FindAccusedPage extends React.Component {
    
     if (user && user.cityId && user && user.role ==='4') {
       const { criminalsTableList  } = this.props.professionals;
-      if(!criminalsTableList){
         this.props.dispatch(professionalAction.getCriminalsTableInfoById('cityId',this.props.user.cityId,this.controller.signal));
-      } 
     }  
   }
 
@@ -82,9 +80,7 @@ class FindAccusedPage extends React.Component {
     });
   };
 
-  componentDidUpdate(prevState) {
-    
-  }
+  
   showCriminalViewModel = () => {
     this.setState({
       setCriminalViewModel: true,
@@ -162,12 +158,12 @@ class FindAccusedPage extends React.Component {
   </div>
        
         <Divider />
-                     
+        <Spin spinning={loading} delay={500}>              
         <FindAccusedTable
            criminalRecords={professionals}
            onViewAccusedDetails= {this.onViewAccusedDetails}
         ></FindAccusedTable>
-       
+       </Spin>
      <Modal
           title="प्रोफेशनल क्रिमिनल"
           top

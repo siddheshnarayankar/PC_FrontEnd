@@ -19,10 +19,11 @@ import {
   message,
  
 } from "antd";
+ 
 import { PlusOutlined } from "@ant-design/icons";
 import { UserForm } from "./userFrom";
 import { UsersListTable } from "./UsersListTable";
-
+ 
 const { Option } = Select;
 const FormItem = Form.Item;
 let columns = [];
@@ -59,6 +60,17 @@ class AppUserLogin extends React.Component {
       this.props.dispatch(userActions.getAdminUsers(4));
     }
 
+    // plain-text string
+    const str = 'Base64 Encoding in Node.js';
+
+    // create a buffer
+    const buff = Buffer.from(str, 'utf-8');
+
+    // decode buffer as Base64
+    const base64 = buff.toString('base64');
+
+    // print Base64 string
+    console.log(base64);
     // this.props.dispatch(professionalAction.getCity());
 
     // if (user && user.role === "8") {
@@ -154,7 +166,8 @@ class AppUserLogin extends React.Component {
         message.success('Update Status Successfully !!!');
     }
   };
-
+  
+  
 
   onUserFormSave = () =>{
       this.userForm.current.onFinish(true);
@@ -162,7 +175,7 @@ class AppUserLogin extends React.Component {
   onUserFormUpdate = () =>{
     this.userForm.current.onFinish(false);
   }
-
+// this.decryptAES(itemObj.generalPassword, "password_1234")
   render() {
     const { users } = this.props;
     const { user } = this.props;
@@ -175,10 +188,13 @@ class AppUserLogin extends React.Component {
         users &&
         users.appusers &&
         users.appusers.map((itemObj, index) => {
+
+          const temppass = itemObj.generalPassword?Buffer.from(itemObj.generalPassword, 'base64'):null;
+
           return {
             ...itemObj,
             key: index + 1,
-            "password":itemObj.phone && itemObj.phone.substr(itemObj.phone && itemObj.phone.length - 4) + itemObj.cityId + itemObj.districtId,
+            "password":  temppass ? temppass.toString('utf-8'):'N/A'
            };
         });
 

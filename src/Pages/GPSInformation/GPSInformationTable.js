@@ -10,6 +10,8 @@ export class GPSInformationTable extends React.Component {
   state = {
     searchText: "",
     searchedColumn: "",
+    filteredInfo: null,
+    sortedInfo: null,
   };
  
   getColumnSearchProps = (dataIndex) => ({
@@ -104,19 +106,35 @@ export class GPSInformationTable extends React.Component {
   }
 
   onChangeTable = (pagination,filters, sorter, extra) =>{
-    if(pagination){
-      this.props.changePagination(extra)
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter,
+    });
+    if(extra && !pagination){
+      this.props.changePagination(this.state.sortedInfo,this.state.filteredInfo,extra)
+    } 
+    
+    if(sorter && sorter.column){
+      this.props.changePagination(this.state.sortedInfo,this.state.filteredInfo,extra)
     }
+
   }
 
   getDateFormat = (value) =>{
     if(value){
-      return moment(value).format('LLL');
+      return moment(value).utcOffset(12).format('LLL');
     }
   }
-
+  clearAll = () => {
+    this.setState({
+      filteredInfo: null,
+      sortedInfo: null,
+    });
+  };
   render() {
-
+    let { sortedInfo, filteredInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+    filteredInfo = filteredInfo || {};
     let tempColumns = [];
 
     // if(this.props.userRole && this.props.userRole.role ==='8'){
@@ -141,7 +159,8 @@ export class GPSInformationTable extends React.Component {
     let columnsOb = [
       {
         title: "SrNo",
-        key: "name",
+        key: "SrNo",
+        dataIndex: 'SrNo',
         render: (text, record) => (
           <Space size="large"    >
               {record && record.SrNo}
@@ -152,11 +171,14 @@ export class GPSInformationTable extends React.Component {
       {
         title: "आरोपीचे नाव",
         key: "name",
+        dataIndex: 'name',
         sorter: (a, b) =>  {
           if(a.name && a.name.length && b.name && b.name.length){
             return a.name && a.name.localeCompare(b.name)
           }
        },
+       
+       sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
         render: (text, record) => (
           <Space size="middle" >
               {record && record.name}
@@ -167,17 +189,18 @@ export class GPSInformationTable extends React.Component {
       {
         title: "पोलीस स्टेशन",
         key: "districtName",
+        dataIndex: 'districtName',
         sorter: (a, b) =>  {
           if(a.districtName && a.districtName.length && b.districtName && b.districtName.length){
             return a.districtName.localeCompare(b.districtName)
           }
         },
+        sortOrder: sortedInfo.columnKey === 'districtName' && sortedInfo.order,
         render: (text, record) => (
           <Space size="middle" style={{width:100}}>
               {record && record.districtName}
           </Space>
         ),
-     
       },
       //  {
       //   title: "पत्ता",
@@ -191,6 +214,8 @@ export class GPSInformationTable extends React.Component {
       {
         title: "User Name",
         key: "userName",
+        dataIndex: 'userName',
+        filteredValue: filteredInfo.userName || null,
         ...this.getColumnSearchProps('userName'),
         render: (text, record) => (
           <Space size="middle"  >
@@ -201,6 +226,7 @@ export class GPSInformationTable extends React.Component {
       {
         title: "फोटो",
         key: "photo",
+        dataIndex: 'photo',
         filters: [
           {
             text: 'फोटो',
@@ -211,8 +237,8 @@ export class GPSInformationTable extends React.Component {
             value: null,
           },
         ],
+        filteredValue: filteredInfo.image || null,
         onFilter: (value, record) => {
-          console.log(value)
           if(value){
             return record.image?record.image.length >= value:null
           }else{
@@ -228,6 +254,7 @@ export class GPSInformationTable extends React.Component {
       {
         title: "GPS Location",
         key: "gpsLocation",
+        dataIndex: 'gpsLocation',
         render: (text, record) => (
           <Space size="middle" style={{display:'flex',flexDirection:'column',alignSelf:'flex-start',}} >
               <div>
@@ -249,14 +276,28 @@ export class GPSInformationTable extends React.Component {
         title: "गस्त वेळ",
         key: "gpstimedate",
         dataIndex:"gpstimedate",
-        defaultSortOrder: 'ascend',
          sorter: (a, b) =>  {
-          let conss =    moment(a.gpstimedate).format('YYYYMMDD') -moment(b.gpstimedate).format('YYYYMMDD')
+          let conss = moment(a.lastUpdatedTime).format('YYYYMMDD') -moment(b.lastUpdatedTime).format('YYYYMMDD')
             return conss
           },
+          sortOrder: sortedInfo.columnKey === 'gpstimedate' && sortedInfo.order,
         render: (text, record) => (
           <Space size="middle"   >
-              {record && record.gpstimedate && record.gpstimedate? this.getDateFormat(record.gpstimedate):'No Date'}
+              {record && record.lastUpdatedTime && record.lastUpdatedTime? this.getDateFormat(record.lastUpdatedTime):'No Date'}
+          </Space>
+        ),
+      },
+      {
+        title: "Counts",
+        key: "counts",
+        dataIndex:"counts",
+         sorter: (a, b) =>  {
+           return  parseInt(a.counts) - parseInt(b.counts)
+         },
+         sortOrder: sortedInfo.columnKey === 'counts' && sortedInfo.order ,
+        render: (text, record) => (
+          <Space size="middle"   >
+              {record && record.counts && record.counts}
           </Space>
         ),
       },
@@ -273,16 +314,16 @@ export class GPSInformationTable extends React.Component {
             value: 0,
           },
         ],
+        filteredValue: filteredInfo.status || null,
         onFilter: (value, record) => {
           if(value){
-            return record.status?record.status === 'yes':null
-          }else{
-            return record.status !== 'No'
+            return record.status === value
           }
+          return  record.status === value
         },
         render: (text, record) => (
           <Space size="middle" style={{display:'flex',flexDirection:'column',alignSelf:'flex-start'}} >
-              {record.status?'होय':'नाही'}
+              {record.status && record.status===1?'होय':'नाही'}
               {record.statusDetails}
           </Space>
         ),
@@ -301,9 +342,12 @@ export class GPSInformationTable extends React.Component {
  {/* <Table   columns={columns} dataSource={this.props.data}  
     pagination={{ total: this.props.totalItems }}
      /> */}
+  <Button onClick={this.clearAll } style={{marginBottom:15}}>Clear filters and sorters</Button>
  <Table   columns={columns} dataSource={this.props.data}  
     pagination={{ total: this.props.totalItems }}
-    onChange={this.onChangeTable} />
+    onChange={this.onChangeTable} 
+    bordered = {true}
+    />
 </>
     );
   }
