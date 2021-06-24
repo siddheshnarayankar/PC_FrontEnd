@@ -2,3 +2,8 @@
         width: 100%;
         height: 200px;
 }   
+
+.allActiveGPSInfoTable .ant-descriptions-item-label{
+        width: 200px;
+                
+}

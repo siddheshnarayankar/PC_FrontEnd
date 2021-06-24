@@ -124,7 +124,9 @@ class Wanted extends React.Component {
         itemType:3,
         role:user && user.role,
         cityId:user && user.cityId,
-        publishedDate:new Date()
+        publishedDate:new Date(),
+        adminGhatak:this.getCityName(user && user.cityId),
+        userName:user && user.userid
       }
       // onSuccess("Ok");
       this.props.dispatch(professionalAction.createNews(obj))
@@ -221,7 +223,9 @@ class Wanted extends React.Component {
               itemType:3,
               role:user && user.role,
               cityId:user && user.cityId,
-              publishedDate:new Date()
+              publishedDate:new Date(),
+              adminGhatak:this.getCityName(user && user.cityId),
+              userName:user && user.userid
             }
             // onSuccess("Ok");
             this.props.dispatch(professionalAction.createNews(obj))

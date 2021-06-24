@@ -33,7 +33,9 @@ export const professionalAction = {
     getGPSInformation,
     getGPSInformationSuccess,
     getReport3,
-    getReport1
+    getReport1,
+    getReport4,
+    getActiveAndNonActiveGpsInforByMasterId
 }
 
 
@@ -704,4 +706,11 @@ function getReport3(data) {
 }
 function getReport1(data) {
     return  professionalService.getReport1(data)     
+}
+function getReport4(data) {
+    return  professionalService.getReport4(data)     
+}
+
+function getActiveAndNonActiveGpsInforByMasterId(masterid) {
+    return  professionalService.getActiveAndNonActiveGpsInforByMasterId(masterid)     
 }

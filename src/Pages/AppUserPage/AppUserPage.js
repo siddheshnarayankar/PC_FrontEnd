@@ -70,7 +70,7 @@ class AppUserLogin extends React.Component {
     const base64 = buff.toString('base64');
 
     // print Base64 string
-    console.log(base64);
+   
     // this.props.dispatch(professionalAction.getCity());
 
     // if (user && user.role === "8") {

@@ -18,6 +18,9 @@ import { Wanted } from "../Pages/Wanted/Wanted";
 import { Help } from "../Pages/Help/Help";
 import { AboutUs } from "../Pages/AboutUs/AboutUs";
 import { Reports } from "../Pages/Reports";
+import { Reports3 } from "../Pages/Reports";
+import { Reports4 } from "../Pages/Reports/Reports4";
+
 
  
  
@@ -59,6 +62,8 @@ class App extends React.Component {
           <PrivateRoute exact path="/aboutus" component={AboutUs} />
           <PrivateRoute exact path="/gps" component={GPSInformation} />
           <PrivateRoute exact path="/reports" component={Reports} />
+          <PrivateRoute exact path="/reports3" component={Reports3} />
+          <PrivateRoute exact path="/reports4" component={Reports4} />
           <PrivateRoute exact path="/ProfessionalForm" component={ProfessionalForm} />
           <Route path="/login" component={LoginPage} />
         </div>

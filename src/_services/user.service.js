@@ -15,8 +15,8 @@ export const userService = {
     updateAppUser
 };
 
- const baseUrl = 'https://www.criminalmis.in/api';
- // const baseUrl = 'http://localhost:8080/api';
+// const baseUrl = 'https://www.criminalmis.in/api';
+   const baseUrl = 'http://localhost:8080/api';
  function createUser(data) {
     const requestOptions = {
         method: 'POST',

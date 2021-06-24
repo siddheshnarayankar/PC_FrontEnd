@@ -20,6 +20,7 @@ import {
 } from "antd";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { GPSInformationTable } from "./GPSInformationTable";
+import { GPSInfoTableByMasterId } from "./GPSInfoTableByMasterId";
 import './GPSInformation.css'
 import { MyDocument } from './GPSPDFDocuments'
 const { Option } = Select;
@@ -29,7 +30,7 @@ let columns = [];
 let data = [];
 
  
-const baseUrl = 'https://www.criminalmis.in/api';
+ 
  // const baseUrl = 'http://localhost:8080/api';
 class GPSInformation extends React.Component {
   constructor(props) {
@@ -41,7 +42,8 @@ class GPSInformation extends React.Component {
     tableColumns:[],
     tableData:[],
     gpsInformationList:[],
-    filterDate:[]
+    filterDate:[],
+    countDrawerOpen:false,
   };
  
   componentDidMount() {
@@ -175,6 +177,23 @@ class GPSInformation extends React.Component {
   }
 
 
+  onCountSelect = (selectedData) =>{
+    console.log(selectedData);
+    professionalAction.getActiveAndNonActiveGpsInforByMasterId(selectedData.masterid).then((res)=>{
+         res && res && res.text().then(async (text) => {
+              console.log( text && JSON.parse(text))
+            })
+     })
+          
+    this.setState({
+      countDrawerOpen: true,
+    });
+  }
+  onCloseCountsDrawer = () => {
+    this.setState({
+      countDrawerOpen: false,
+    });
+  };
   // getPDFFile = () => {
   //   let startDate ='';
   //   if(this.state.startDate){
@@ -340,10 +359,30 @@ class GPSInformation extends React.Component {
           columns={columns}
           userRole ={user}
           changePagination = {this.changePagination}
+          onCountSelect = {this.onCountSelect}
         ></GPSInformationTable>
         </div>
         </Spin>
-      
+        <Drawer
+          title="Lock The Address"
+          placement="right"
+          width={1000}
+          closable={true}
+          onClose={this.onCloseCountsDrawer}
+          visible={this.state.countDrawerOpen}
+          footer={
+            <div
+              style={{
+                textAlign: "right",
+              }}
+            >
+            <Button type="default"  className="mb-4 mr-2" style={{marginRight:'15px'}} onClick={this.onCloseCountsDrawer}> Cancel </Button>
+            <Button type="primary"  className="mb-4"> Save </Button>
+            </div>
+          }
+        >
+        <GPSInfoTableByMasterId data={[]}  ></GPSInfoTableByMasterId>
+        </Drawer>
       </div>
       </>
     );

@@ -131,6 +131,12 @@ export class GPSInformationTable extends React.Component {
       sortedInfo: null,
     });
   };
+
+  onCountSelect = (selectedrecord) =>{
+    if(selectedrecord){
+      this.props.onCountSelect(selectedrecord);
+    }
+  }
   render() {
     let { sortedInfo, filteredInfo } = this.state;
     sortedInfo = sortedInfo || {};
@@ -297,7 +303,7 @@ export class GPSInformationTable extends React.Component {
          sortOrder: sortedInfo.columnKey === 'counts' && sortedInfo.order ,
         render: (text, record) => (
           <Space size="middle"   >
-              {record && record.counts && record.counts}
+              <a href="javascript:void(0);" onClick={() => this.onCountSelect(record)} >{record && record.counts && record.counts}</a>
           </Space>
         ),
       },

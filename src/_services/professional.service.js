@@ -23,10 +23,12 @@ export const professionalService = {
     updateNews,
     getGPSInformation,
     getReport3,
-    getReport1
+    getReport1,
+    getReport4,
+    getActiveAndNonActiveGpsInforByMasterId
 }
-  // const baseUrl = 'http://localhost:8080/api';
-  const baseUrl = 'https://www.criminalmis.in/api';
+    const baseUrl = 'http://localhost:8080/api';
+  // const baseUrl = 'https://www.criminalmis.in/api';
 
 function getAllMaster() {
     const requestOptions = {
@@ -217,6 +219,26 @@ function getReport1(data) {
     }
     return fetch(`${baseUrl}/criminal/getReports1`, requestOptions);
 }
+function getReport4(data) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            ...authHeader()
+        } ,
+        body: JSON.stringify(data)
+    }
+    return fetch(`${baseUrl}/criminal/getReports4`, requestOptions);
+}
+
+function getActiveAndNonActiveGpsInforByMasterId(masterid) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    }
+    return fetch(`${baseUrl}/criminal/getActiveAndNonActiveGpsInforByMasterId/${masterid}`, requestOptions);
+}
+
 
 
 function uploadImage(data) {

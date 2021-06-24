@@ -75,6 +75,17 @@ export const AppLayout = (props) => {
       setActiveMenu('11');
       setActiveMenu('111');
     }, 100);
+  }else if(location.pathname==='/reports3'){
+    setTimeout(() => {
+      setActiveMenu('11');
+      setActiveMenu('112');
+    }, 100);
+  }
+  else if(location.pathname==='/reports4'){
+    setTimeout(() => {
+      setActiveMenu('11');
+      setActiveMenu('113');
+    }, 100);
   }
   },[location.pathname])
   
@@ -152,6 +163,12 @@ export const AppLayout = (props) => {
             {/* <Menu.Item key="3">आरोपी शोधा</Menu.Item> */}
               <Menu.Item key="111">
                 <Link to="/reports">आरोपी सांख्यकी अहवाल</Link>
+              </Menu.Item>
+              <Menu.Item key="112">
+                <Link to="/reports3">पोलिस स्टेशन निहाय गस्त आकडेवारी अहवाल</Link>
+              </Menu.Item>
+              <Menu.Item key="113">
+                <Link to="/reports4">अद्याप चेक न केलेले आरोपी</Link>
               </Menu.Item>
             </SubMenu>
             </>

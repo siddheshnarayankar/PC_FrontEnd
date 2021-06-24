@@ -67,6 +67,7 @@ class ProfessionalForm extends React.Component {
     isEditForms: false,
     resetBasicForm: false,
     setCriminalViewModel: false,
+    resetBaseFormRandom:0
   };
   basicInformationRef = React.createRef();
   ghunhaInfomationRef = React.createRef();
@@ -108,8 +109,9 @@ class ProfessionalForm extends React.Component {
   showAccusedDrawer = () => {
     this.setState({
       accusedDrawer: true,
-      resetBasicForm: false,
+      resetBasicForm: true,
       isEditForms: false,
+      resetBaseFormRandom: Math.random()
     });
   };
   onCloseAccusedDrawer = () => {
@@ -121,7 +123,7 @@ class ProfessionalForm extends React.Component {
       ghunhaDrawer: false,
       accusedDrawer: false,
       current: 0,
-      resetBasicForm: true,
+      resetBasicForm: false,
       isEditForms: false,
     }));
   };
@@ -227,6 +229,7 @@ class ProfessionalForm extends React.Component {
       ghunhaDrawer: true,
       isGunhaEdit: true,
       newGunha: false,
+      resetBasicForm: false,
     }));
   };
   deleteGhunhaInfomation = (data, index) => {
@@ -465,6 +468,7 @@ class ProfessionalForm extends React.Component {
                 onCityChange={this.onCityChange}
                 isEditForms={this.state.isEditForms}
                 uploadImage ={this.uploadImage}
+                resetBasicForm={this.state.resetBasicForm}
               ></BasicInformation>
             ) : steps[this.state.current].flag === 2 ? (
               <div>

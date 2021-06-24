@@ -116,12 +116,10 @@ export const BasicInformation = forwardRef((props, ref) => {
   );
 
   useEffect((res) =>{
-
-    // if(props.basicInformationData[0]){
-
-    // }
-
-  },[props.isEditForms && props.isEditForms])
+    if(props.resetBasicForm){
+      form.resetFields();
+    }
+  },[props.resetBasicForm])
 
   const onCityChange = (value) => {
     clearDistrictSelected();
