@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Input, Button, Space,Select,Tag } from "antd";
+import { Table, Input, Button, Space,Select,Tag ,Badge,Tooltip} from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import _ from "lodash";
@@ -303,7 +303,10 @@ export class GPSInformationTable extends React.Component {
          sortOrder: sortedInfo.columnKey === 'counts' && sortedInfo.order ,
         render: (text, record) => (
           <Space size="middle"   >
-              <a href="javascript:void(0);" onClick={() => this.onCountSelect(record)} >{record && record.counts && record.counts}</a>
+              {/* {record && record.ismark ? <Badge count="Locked" />:null}   */}
+              <Tooltip title={record && record.ismark?'Locked':null}>
+              <a href="javascript:void(0);" onClick={() => this.onCountSelect(record)} >  <Tag color={record && record.ismark?"red":"green"}>{record && record.counts && record.counts}</Tag>  </a>
+              </Tooltip>
           </Space>
         ),
       },

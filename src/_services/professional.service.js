@@ -25,10 +25,11 @@ export const professionalService = {
     getReport3,
     getReport1,
     getReport4,
-    getActiveAndNonActiveGpsInforByMasterId
+    getActiveAndNonActiveGpsInforByMasterId,
+    markAsLockAddress
 }
-    const baseUrl = 'http://localhost:8080/api';
-  // const baseUrl = 'https://www.criminalmis.in/api';
+   // const baseUrl = 'http://localhost:8080/api';
+  const baseUrl = 'https://www.criminalmis.in/api';
 
 function getAllMaster() {
     const requestOptions = {
@@ -230,6 +231,20 @@ function getReport4(data) {
     }
     return fetch(`${baseUrl}/criminal/getReports4`, requestOptions);
 }
+
+function markAsLockAddress(data) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            ...authHeader()
+        } ,
+        body: JSON.stringify(data)
+    }
+    return fetch(`${baseUrl}/criminal/markAsLockAddress`, requestOptions);
+}
+
+
 
 function getActiveAndNonActiveGpsInforByMasterId(masterid) {
     const requestOptions = {

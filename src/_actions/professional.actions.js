@@ -35,7 +35,8 @@ export const professionalAction = {
     getReport3,
     getReport1,
     getReport4,
-    getActiveAndNonActiveGpsInforByMasterId
+    getActiveAndNonActiveGpsInforByMasterId,
+    markAsLockAddress
 }
 
 
@@ -713,4 +714,8 @@ function getReport4(data) {
 
 function getActiveAndNonActiveGpsInforByMasterId(masterid) {
     return  professionalService.getActiveAndNonActiveGpsInforByMasterId(masterid)     
+}
+
+function markAsLockAddress(data) {
+    return  professionalService.markAsLockAddress(data)     
 }

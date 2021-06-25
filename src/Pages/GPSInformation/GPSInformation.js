@@ -44,6 +44,8 @@ class GPSInformation extends React.Component {
     gpsInformationList:[],
     filterDate:[],
     countDrawerOpen:false,
+    gpsCountList:[],
+    gpsCountSelectedName:''
   };
  
   componentDidMount() {
@@ -178,17 +180,39 @@ class GPSInformation extends React.Component {
 
 
   onCountSelect = (selectedData) =>{
-    console.log(selectedData);
-    professionalAction.getActiveAndNonActiveGpsInforByMasterId(selectedData.masterid).then((res)=>{
-         res && res && res.text().then(async (text) => {
-              console.log( text && JSON.parse(text))
-            })
-     })
-          
-    this.setState({
-      countDrawerOpen: true,
-    });
+    if(selectedData){
+      professionalAction.getActiveAndNonActiveGpsInforByMasterId(selectedData.masterid).then((res)=>{
+        res && res && res.text().then(async (text) => {
+         this.setState({
+           countDrawerOpen: true,
+           gpsCountList:text && JSON.parse(text),
+           gpsCountSelectedName:selectedData
+         });
+        })
+      })
+    }
   }
+
+  onLockTheAddress  = (data) =>{
+    if(data){
+      professionalAction.markAsLockAddress(data).then((res)=>{ 
+          if(res && res.status === 200){
+            this.setState({
+              countDrawerOpen: false,
+              gpsCountList:[],
+              gpsCountSelectedName:[]
+            });
+            if(data.flag){
+              message.success('Locked the address successfully !!!');
+            }else{
+              message.success('UnLocked the address successfully !!!');
+            }
+            
+          }
+      })
+    }
+  }
+
   onCloseCountsDrawer = () => {
     this.setState({
       countDrawerOpen: false,
@@ -364,7 +388,7 @@ class GPSInformation extends React.Component {
         </div>
         </Spin>
         <Drawer
-          title="Lock The Address"
+          title="प्रोफेशनल आरोपीची GPS माहिती"
           placement="right"
           width={1000}
           closable={true}
@@ -377,11 +401,11 @@ class GPSInformation extends React.Component {
               }}
             >
             <Button type="default"  className="mb-4 mr-2" style={{marginRight:'15px'}} onClick={this.onCloseCountsDrawer}> Cancel </Button>
-            <Button type="primary"  className="mb-4"> Save </Button>
+            {/* <Button type="primary"  className="mb-4"> Save </Button> */}
             </div>
           }
         >
-        <GPSInfoTableByMasterId data={[]}  ></GPSInfoTableByMasterId>
+        <GPSInfoTableByMasterId  onLockTheAddress ={this.onLockTheAddress} data={this.state.gpsCountList} selected={this.state.gpsCountSelectedName}  ></GPSInfoTableByMasterId>
         </Drawer>
       </div>
       </>
