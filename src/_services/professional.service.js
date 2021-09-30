@@ -26,10 +26,14 @@ export const professionalService = {
     getReport1,
     getReport4,
     getActiveAndNonActiveGpsInforByMasterId,
-    markAsLockAddress
+    markAsLockAddress,
+    getTotalAppUsersCount,
+    getTotalCriminalCount,
+    getTotalRegisterPoliceStationCount,
+    getTotalTodayGPSCount
 }
-   // const baseUrl = 'http://localhost:8080/api';
-  const baseUrl = 'https://www.criminalmis.in/api';
+   const baseUrl = 'http://localhost:8080/api';
+  // const baseUrl = 'https://www.criminalmis.in/api';
 
 function getAllMaster() {
     const requestOptions = {
@@ -244,6 +248,34 @@ function markAsLockAddress(data) {
     return fetch(`${baseUrl}/criminal/markAsLockAddress`, requestOptions);
 }
 
+function getTotalAppUsersCount(cityId) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    }
+    return fetch(`${baseUrl}/criminal/getTotalAppUsersCount/${cityId}`, requestOptions);
+}
+function getTotalCriminalCount(cityId) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    }
+    return fetch(`${baseUrl}/criminal/getTotalCriminalCount/${cityId}`, requestOptions);
+}
+function getTotalRegisterPoliceStationCount(cityId) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    }
+    return fetch(`${baseUrl}/criminal/getTotalRegisterPoliceStationCount/${cityId}`, requestOptions);
+}
+function getTotalTodayGPSCount(cityId) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    }
+    return fetch(`${baseUrl}/criminal/getTotalTodayGPSCount/${cityId}`, requestOptions);
+}
 
 
 function getActiveAndNonActiveGpsInforByMasterId(masterid) {

@@ -1,7 +1,125 @@
 .ant-card.loginCard{
-    width: 35%;
-    margin:auto;
-    border: 2px solid #f9f9f9;
-    box-shadow: 0px 0px 10px #b9b9b9;
-    margin-top: 30px;
+    width: 50%;
+    box-shadow: 0px 0px 4px 1px #949494;
+    background-color: transparent;
+    margin: auto;
+    /* position: absolute; */
+    inset: 0;
+    height: 315px;
 }
+   
+.slick-list {
+    min-height: 300px;
+}
+
+
+.ant-card.loginCard .ant-form-item-label{
+    text-align: left;
+ 
+}
+.ant-card.loginCard .ant-form-item-label >label{
+    color: #fff!important;
+}
+.ant-card.loginCard .ant-input{
+    background-color: transparent!important;
+    color: #fff!important;
+}
+.ant-card.loginCard .ant-input-affix-wrapper{
+    background-color: transparent!important;
+    color: #fff!important;
+
+    
+}
+
+.ant-card.loginCard .ant-checkbox-wrapper{
+    color: #fff!important;
+}
+
+@media screen and (max-width: 1000px) {
+    .ant-card.loginCard{
+        width: 50%;
+        box-shadow: 0px 0px 4px 1px #949494;
+        background-color: transparent;
+        margin: auto;
+        position: absolute;
+        inset: 0;
+        height: 315px;
+   
+    }
+  }
+
+  .login-heading-wrap{
+    text-align: center;
+    margin-bottom: 4em;
+  }
+  .login-heading{
+    margin: 15px 0px 0px 0px;
+    font-size: 5em;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1em;
+    margin-bottom: 5px;
+    text-align: center;
+    padding-top: 1em;
+    font-family: serif;
+  }
+  .login-subheading{
+      color: #ccc;
+  }
+
+  .login-wrap {
+    background-color: #384e75;
+    height: 100vh;
+    position: relative}
+
+    .login-wrap > .ant-row{
+        /* height: 100vh; */
+    }
+    .crousel {
+        width: 80%;
+        margin: auto;
+    }
+    .login-footer-wrap {
+        color: #ccc;
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    .login-wrap .ant-btn{
+        background-color: transparent;
+        color: #fff;
+    }
+    .login-wrap .ant-btn:hover{
+        color: #364967;
+        border-color: #fff;
+    }    
+
+    .login-wrap  .leftLine {
+        width: 2px;
+        background-color: #9e9e9e;
+        height: 60%;
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        margin-left: 0;
+    }
+
+
+    .video-wrap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .video-wrap video{
+        width: 80%;
+    height: 400px;
+    }
+
+    .rememberMeCheckbox .ant-checkbox-checked .ant-checkbox-inner {
+        background-color: #fff;
+        border-color: #fff;
+    }
+    .rememberMeCheckbox .ant-checkbox-checked .ant-checkbox-inner::after{
+        border-color: #004383;
+    }

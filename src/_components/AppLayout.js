@@ -220,7 +220,7 @@ export const AppLayout = (props) => {
           <Menu theme="dark" mode="horizontal">
            
             <SubMenu key="SubMenu" icon={<SettingOutlined />} title={user.userid}>
-              <Menu.Item key="setting:1">Profile {users}</Menu.Item>
+              <Menu.Item key="setting:1" > <Link to="/profile">Profile {users}</Link></Menu.Item>
               <Menu.Item key="setting:2">
                 <Link to="/login">Logout</Link>
               </Menu.Item>

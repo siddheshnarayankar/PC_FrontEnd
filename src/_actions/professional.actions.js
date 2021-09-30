@@ -36,8 +36,13 @@ export const professionalAction = {
     getReport1,
     getReport4,
     getActiveAndNonActiveGpsInforByMasterId,
-    markAsLockAddress
+    markAsLockAddress,
+    getTotalAppUsersCount,
+    getTotalCriminalCount,
+    getTotalRegisterPoliceStationCount,
+    getTotalTodayGPSCount
 }
+
 
 
 
@@ -47,8 +52,8 @@ function getAllMaster() {
     return dispatch => {
         professionalService.getAllMaster()
             .then((professionals) => {
-                    dispatch(success(professionals));
-                },
+                dispatch(success(professionals));
+            },
                 error => {
                     dispatch(failure(error));
                 })
@@ -418,10 +423,10 @@ function createNews(data) {
 
 
 function getGPSInformation(cityId) {
-  
-        // dispatch(request());
-        return  professionalService.getGPSInformation(cityId)     
-     
+
+    // dispatch(request());
+    return professionalService.getGPSInformation(cityId)
+
 
     // function request(gpsInformation) {
     //     return {
@@ -445,17 +450,17 @@ function getGPSInformation(cityId) {
     // }
 }
 
-    function getGPSInformationSuccess(gpsInformation) {
-        return dispatch => {
-            dispatch(success(gpsInformation));
-        }
-        function success(gpsInformation) {
-            return {
-                type: professionalConstants.GET_GPS_INFORMATION_SUCCESS,
-                gpsInformation
-            }
+function getGPSInformationSuccess(gpsInformation) {
+    return dispatch => {
+        dispatch(success(gpsInformation));
+    }
+    function success(gpsInformation) {
+        return {
+            type: professionalConstants.GET_GPS_INFORMATION_SUCCESS,
+            gpsInformation
         }
     }
+}
 
 function getNews(itemType) {
     return dispatch => {
@@ -495,7 +500,7 @@ function updateNews(id, data) {
         ...data,
         id
     }
-  
+
     return dispatch => {
         dispatch(request());
         professionalService.updateNews(id, data)
@@ -565,14 +570,14 @@ function getCriminalsById(id) {
 
 function getCriminalsViewsById(id) {
     return dispatch => {
-          dispatch(request());
+        dispatch(request());
         professionalService.getCriminalsById(id)
-        .then((response) => {
-            dispatch(success(response));
-        }, error => {
-            dispatch(failure(error));
-        })
-       
+            .then((response) => {
+                dispatch(success(response));
+            }, error => {
+                dispatch(failure(error));
+            })
+
 
         function request(criminalViewList) {
             return {
@@ -600,10 +605,10 @@ function getCriminalsViewsById(id) {
 
 
 
-function getCriminalsTableInfoById(falg,id,control) {
+function getCriminalsTableInfoById(falg, id, control) {
     return dispatch => {
         dispatch(request());
-        professionalService.getCriminalsTableInfoById(falg,id,control)
+        professionalService.getCriminalsTableInfoById(falg, id, control)
             .then((response) => {
                 dispatch(success(response));
             }, error => {
@@ -672,11 +677,11 @@ function uploadImage(data) {
     return dispatch => {
         // dispatch(request());
         return professionalService.uploadImage(data)
-            // .then((response) => {
-            //     dispatch(success(response));
-            // }, error => {
-            //   ///  dispatch(failure(error));
-            // })
+        // .then((response) => {
+        //     dispatch(success(response));
+        // }, error => {
+        //   ///  dispatch(failure(error));
+        // })
     }
 
     // function request(criminalsUpdatedList) {
@@ -703,19 +708,33 @@ function uploadImage(data) {
 
 
 function getReport3(data) {
-    return  professionalService.getReport3(data)     
+    return professionalService.getReport3(data)
 }
 function getReport1(data) {
-    return  professionalService.getReport1(data)     
+    return professionalService.getReport1(data)
 }
 function getReport4(data) {
-    return  professionalService.getReport4(data)     
+    return professionalService.getReport4(data)
 }
 
 function getActiveAndNonActiveGpsInforByMasterId(masterid) {
-    return  professionalService.getActiveAndNonActiveGpsInforByMasterId(masterid)     
+    return professionalService.getActiveAndNonActiveGpsInforByMasterId(masterid)
 }
 
 function markAsLockAddress(data) {
-    return  professionalService.markAsLockAddress(data)     
+    return professionalService.markAsLockAddress(data)
 }
+
+function getTotalAppUsersCount(cityId) {
+    return professionalService.getTotalAppUsersCount(cityId);
+}
+function getTotalCriminalCount(cityId) {
+    return professionalService.getTotalCriminalCount(cityId);
+}
+function getTotalRegisterPoliceStationCount(cityId) {
+    return professionalService.getTotalRegisterPoliceStationCount(cityId);
+}
+function getTotalTodayGPSCount(cityId) {
+    return professionalService.getTotalTodayGPSCount(cityId);
+}
+

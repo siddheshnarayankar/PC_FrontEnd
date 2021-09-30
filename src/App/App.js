@@ -20,6 +20,8 @@ import { AboutUs } from "../Pages/AboutUs/AboutUs";
 import { Reports } from "../Pages/Reports";
 import { Reports3 } from "../Pages/Reports";
 import { Reports4 } from "../Pages/Reports/Reports4";
+import { Profile } from "../Pages/Profile";
+import { Dashboard } from "../Pages/Dashboard/Dashboard";
 
 
  
@@ -52,14 +54,16 @@ class App extends React.Component {
     return (
       <Router history={history}>
         <div>
-          <PrivateRoute exact path="/" component={authentication && authentication.user && authentication.user.role ==='2'?ProfessionalForm:HomePage} />
+          <PrivateRoute exact path="/" component={authentication && authentication.user && authentication.user.role ==='2'?ProfessionalForm:Dashboard} />
           <PrivateRoute exact path="/AppUserLogin" component={AppUserLogin} />
           <PrivateRoute exact path="/finds" component={FindAccusedPage} />
           <PrivateRoute exact path="/News" component={News} />
+          <PrivateRoute exact path="/users" component={HomePage} />
           <PrivateRoute exact path="/Notifications" component={Notifications} />
           <PrivateRoute exact path="/wanted" component={Wanted} />
           <PrivateRoute exact path="/help" component={Help} />
           <PrivateRoute exact path="/aboutus" component={AboutUs} />
+          <PrivateRoute exact path="/profile" component={Profile} />
           <PrivateRoute exact path="/gps" component={GPSInformation} />
           <PrivateRoute exact path="/reports" component={Reports} />
           <PrivateRoute exact path="/reports3" component={Reports3} />
