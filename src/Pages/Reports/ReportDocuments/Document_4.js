@@ -116,10 +116,10 @@ export  const Document4 = (props) => (
         <Text style={{fontSize:'14px',fontWeight:600,marginBottom:8,  fontFamily:'Poppins-Regular',}}>(CMIS)-अद्याप चेक न केलेले आरोपी</Text>
             <View  style={styles.tableHeaderDates}>
                     <Text style={{fontSize:'14px',marginBottom:8,marginRight:10}}>{
-                props.filterDate?'From: '+ moment(props.filterDate && props.filterDate.startDate).format('YYYY/MM/DD'):null
+                props.filterDate?'From: '+ moment(props.filterDate && props.filterDate.startDate).format('DD-MM-YYYY'):null
                 }</Text>
                     <Text style={{fontSize:'14px',marginBottom:8}}>{
-                props.filterDate?'To: '+ moment(props.filterDate && props.filterDate.endDate).format('YYYY/MM/DD'):null
+                props.filterDate?'To: '+ moment(props.filterDate && props.filterDate.endDate).format('DD-MM-YYYY'):null
                 }</Text>
             </View>
            <Text style={{fontSize:'14px',fontFamily:'Poppins-Regular'}}>एकूण आरोपी :{props.total && props.total}</Text>
@@ -130,6 +130,8 @@ export  const Document4 = (props) => (
            <Text  style={styles.indexCell}>अ.क्र.</Text>
             <Text  style={styles.cell}>नाव</Text>
             <Text  style={styles.cell}>आरोपीचे पोलिस ठाण</Text>
+            <Text  style={styles.cell}>Last Update</Text>
+            <Text  style={styles.cell}>Count</Text>
             <Text  style={styles.imageCell}>फोटो</Text>
         </View>
       </View>
@@ -142,6 +144,8 @@ export  const Document4 = (props) => (
                     <Text  style={styles.indexCell}>{index + 1}</Text>
                     <Text  style={styles.cell}>{item.name}</Text>
                     <Text  style={styles.cell}>{item.districtName}</Text>
+                    <Text  style={styles.cell}>{ moment(item.lastUpdate && item.lastUpdate).format('DD-MM-YYYY')}</Text>
+                    <Text  style={styles.cell}>{item.count}</Text>
                     {
                         item.photo?(
                             <Image style={styles.imageCell} src={`https://pcimageupload.s3.ap-south-1.amazonaws.com/${item.photo}`}  /> 

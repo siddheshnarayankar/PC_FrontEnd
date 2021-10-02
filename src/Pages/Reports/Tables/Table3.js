@@ -45,15 +45,15 @@ export class TableReport3 extends React.Component {
           </Space>
         ),
       },
-      // {
-      //   title: "एकूण तपासले",
-      //   key: "totalCriminalsChecked",
-      //   render: (text, record) => (
-      //     <Space size="middle" style={{maxWidth:300}}>
-      //         {record.totalCriminals}
-      //     </Space>
-      //   ),
-      // },
+      {
+        title: "एकूण तपासले",
+        key: "totalCriminalsChecked",
+        render: (text, record) => (
+          <Space size="middle" style={{maxWidth:300}}>
+              {record.totalCriminalsChecked}
+          </Space>
+        ),
+      },
       {
         title: "मिळून आलेला",
         key: "totalFindCriminals",

@@ -93,7 +93,7 @@ export  const Document2 = (props) => (
        <View style={styles.header} >
         <Text style={{fontSize:'14px',fontWeight:600,marginBottom:8,  fontFamily:'Poppins-Regular',}}>(CMIS)-आरोपी सांख्यकी अहवाल</Text>
         <Text style={{fontSize:'14px',marginBottom:8}}>{
-           props.filterDate?'From: '+ moment(props.filterDate && props.filterDate.startDate).format('YYYY/MM/DD'):null
+           props.filterDate?'From: '+ moment(props.filterDate && props.filterDate.startDate).format('DD-MM-YYYY'):null
          }</Text>
            <Text style={{fontSize:'14px',fontFamily:'Poppins-Regular'}}>एकूण आरोपी :{props.total && props.total}</Text>
        </View>

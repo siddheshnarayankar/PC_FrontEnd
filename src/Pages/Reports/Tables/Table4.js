@@ -46,6 +46,24 @@ export class TableReport4 extends React.Component {
         ),
       },
       {
+        title: "Last Update Date",
+        key: "lastUpdate",
+        render: (text, record) => (
+          <Space size="middle" style={{maxWidth:300}}>
+              {moment(record.lastUpdate && record.lastUpdate).format('DD-MM-YYYY')}
+          </Space>
+        ),
+      },
+      {
+        title: "count",
+        key: "count",
+        render: (text, record) => (
+          <Space size="middle" style={{maxWidth:300}}>
+              {record.count}
+          </Space>
+        ),
+      },
+      {
         title: "फोटो",
         key: "photo",
         render: (text, record) => (
